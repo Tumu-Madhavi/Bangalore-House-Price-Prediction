@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>House Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🏠 Bangalore House Price Prediction</h1>
+        <form action="/predict" method="POST">
+            <input type="number" name="sqft" placeholder="Total Square Feet" required>
+            <input type="number" name="bath" placeholder="Number of Bathrooms" required>
+            <input type="number" name="bhk" placeholder="Number of BHK" required>
+            <select name="location" required>
+                {% for loc in locations %}
+                    <option value="{{ loc }}">{{ loc }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction_text %}
+            <h2>{{ prediction_text }}</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
